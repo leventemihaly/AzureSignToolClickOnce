@@ -12,9 +12,7 @@ namespace AzureSignToolClickOnce
             string timeStampUrl = string.Empty;
             string timeStampUrlRfc3161 = string.Empty;
             var keyVaultUrl = string.Empty;
-            var ADTenantId = string.Empty;
-            var clientId = string.Empty;
-            var clientSecret = string.Empty;
+            var ADTenantId = string.Empty;            
             var certName = string.Empty;
 
             foreach (string arg in args)
@@ -37,12 +35,6 @@ namespace AzureSignToolClickOnce
                         break;
                     case "-azure-key-vault-url":
                         keyVaultUrl = value;
-                        break;
-                    case "-azure-key-vault-client-id":
-                        clientId = value;
-                        break;
-                    case "-azure-key-vault-client-secret":
-                        clientSecret = value;
                         break;
                     case "-azure-key-vault-tenant-id":
                         ADTenantId = value;
@@ -69,17 +61,7 @@ namespace AzureSignToolClickOnce
             {
                 Console.WriteLine($"Missing option -azure-key-vault-url");
                 return;
-            }
-            if (string.IsNullOrEmpty(clientId))
-            {
-                Console.WriteLine($"Missing option -azure-key-vault-client-id");
-                return;
-            }
-            if (string.IsNullOrEmpty(clientSecret))
-            {
-                Console.WriteLine($"Missing option -azure-key-vault-client-secret");
-                return;
-            }
+            }            
             if (string.IsNullOrEmpty(ADTenantId))
             {
                 Console.WriteLine($"Missing option -azure-key-vault-tenant-id");
@@ -105,7 +87,7 @@ namespace AzureSignToolClickOnce
             }
 
             var service = new AzureSignToolService();
-            service.Start(description, path, timeStampUrl, timeStampUrlRfc3161, keyVaultUrl, ADTenantId, clientId, clientSecret, certName);
+            service.Start(description, path, timeStampUrl, timeStampUrlRfc3161, keyVaultUrl, ADTenantId, certName);
         }
     }
 }

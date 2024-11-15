@@ -16,9 +16,9 @@ namespace AzureSignToolClickOnce.Services
     public class AzureSignToolService
     {
         private string _magetoolPath = @"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\mage.exe";
-        public void Start(string description, string path, string timeStampUrl, string timeStampUrlRfc3161, string keyVaultUrl, string tenantId, string clientId, string clientSecret, string certName)
+        public void Start(string description, string path, string timeStampUrl, string timeStampUrlRfc3161, string keyVaultUrl, string tenantId, string certName)
         {
-            var tokenCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+            var tokenCredential = new DefaultAzureCredential();
             var client = new CertificateClient(vaultUri: new Uri(keyVaultUrl), credential: tokenCredential);
             var cert = client.GetCertificate(certName).Value;
             var certificate = new X509Certificate2(cert.Cer);
